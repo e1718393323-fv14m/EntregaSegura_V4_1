@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EntregaSegura.Views.vLogin"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource Primario}">
+    <ScrollView>
+        <Grid RowDefinitions="Auto,*">
+
+            <!-- Encabezado de marca -->
+            <VerticalStackLayout Padding="30,60,30,30" Spacing="8">
+                <Image Source="logo.png" WidthRequest="84" HeightRequest="84" HorizontalOptions="Start" />
+                <Label Text="Entrega Segura" FontSize="30" FontAttributes="Bold" TextColor="White" Margin="0,12,0,0" />
+                <Label Text="Cada entrega con evidencia." FontSize="16" TextColor="#C9D3E6" />
+            </VerticalStackLayout>
+
+            <!-- Formulario en tarjeta -->
+            <Border Grid.Row="1" BackgroundColor="{StaticResource Fondo}" StrokeThickness="0"
+                    StrokeShape="RoundRectangle 28,28,0,0" Padding="24,30">
+                <VerticalStackLayout Spacing="14" MaximumWidthRequest="460">
+                    <Label Text="Iniciar sesión" Style="{StaticResource Titulo}" />
+                    <Label Text="Ingrese con su correo corporativo." Style="{StaticResource Suave}" />
+
+                    <Label Text="Correo" Style="{StaticResource Etiqueta}" Margin="0,6,0,0" />
+                    <Border Style="{StaticResource Caja}">
+                        <Entry x:Name="txtCorreo" Style="{StaticResource Entrada}" Placeholder="nombre@entregasegura.com"
+                               Keyboard="Email" IsSpellCheckEnabled="False" />
+                    </Border>
+
+                    <Label Text="Contraseña" Style="{StaticResource Etiqueta}" />
+                    <Border Style="{StaticResource Caja}">
+                        <Entry x:Name="txtContrasena" Style="{StaticResource Entrada}" Placeholder="Su contraseña"
+                               IsPassword="True" ReturnType="Go" Completed="txtContrasena_Completed" />
+                    </Border>
+
+                    <Grid ColumnDefinitions="Auto,*,Auto,*">
+                        <CheckBox x:Name="chkMostrar" Color="{StaticResource Primario}" CheckedChanged="chkMostrar_CheckedChanged" />
+                        <Label Grid.Column="1" Text="Mostrar" Style="{StaticResource Suave}" VerticalOptions="Center" />
+                        <CheckBox Grid.Column="2" x:Name="chkRecordar" Color="{StaticResource Primario}" />
+                        <Label Grid.Column="3" Text="Recordar correo" Style="{StaticResource Suave}" VerticalOptions="Center" />
+                    </Grid>
+
+                    <Button x:Name="btnIngresar" Text="Ingresar" Style="{StaticResource BotonPrimario}" Clicked="btnIngresar_Clicked" />
+                    <Button x:Name="btnOlvide" Text="¿Olvidó su contraseña?" Style="{StaticResource BotonTexto}"
+                            HorizontalOptions="Center" Clicked="btnOlvide_Clicked" />
+
+                    <!-- Aviso de modo sin conexión -->
+                    <Border x:Name="brdSinConexion" Style="{StaticResource Banner}" BackgroundColor="{StaticResource AvisoSuave}" IsVisible="False">
+                        <Label Text="Sin conexión a internet. Puede ingresar si ya inició sesión antes en este teléfono; sus entregas se enviarán cuando vuelva la señal."
+                               FontSize="13" TextColor="{StaticResource Aviso}" />
+                    </Border>
+                    <ActivityIndicator x:Name="indicador" IsRunning="False"
+                                       Color="{StaticResource Acento}" HeightRequest="28" />
+
+                    <Label Text="Universidad Tecnológica Israel · Desarrollo de Aplicaciones Móviles"
+                           Style="{StaticResource Suave}" FontSize="11" HorizontalTextAlignment="Center" Margin="0,20,0,0" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+    </ScrollView>
+</ContentPage>

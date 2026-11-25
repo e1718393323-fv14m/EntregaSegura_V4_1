@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:modelos="clr-namespace:EntregaSegura.Models"
+             x:Class="EntregaSegura.Views.vTodasOrdenes"
+             Title="Todas las órdenes"
+             Style="{StaticResource Pagina}">
+    <Grid RowDefinitions="Auto,Auto,*" Padding="20,16,20,0" RowSpacing="12">
+        <VerticalStackLayout Spacing="2">
+            <Label Text="Todas las órdenes" Style="{StaticResource Titulo}" />
+            <Label x:Name="lblCantidad" Text="Cargando..." Style="{StaticResource Suave}" />
+        </VerticalStackLayout>
+        <Border Grid.Row="1" Style="{StaticResource Caja}">
+            <Picker x:Name="pkFiltro" Title="Filtrar por estado" TextColor="{StaticResource Texto}" BackgroundColor="Transparent"
+                    SelectedIndexChanged="pkFiltro_SelectedIndexChanged">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Todas</x:String>
+                        <x:String>Pendientes</x:String>
+                        <x:String>Entregadas</x:String>
+                        <x:String>Con novedad</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+        </Border>
+
+        <RefreshView x:Name="refrescar" Grid.Row="2" Refreshing="refrescar_Refreshing" RefreshColor="{StaticResource Acento}">
+            <CollectionView x:Name="lstOrdenes" SelectionMode="Single" SelectionChanged="lstOrdenes_SelectionChanged">
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout Padding="30" Spacing="8" HorizontalOptions="Center">
+                        <Label Text="Sin órdenes" Style="{StaticResource Seccion}" HorizontalTextAlignment="Center" />
+                        <Label Text="No hay órdenes con este filtro." Style="{StaticResource Suave}" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="modelos:Orden">
+                        <Border Style="{StaticResource Tarjeta}" Margin="0,0,0,12">
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                                <Border WidthRequest="42" HeightRequest="42" StrokeThickness="0" StrokeShape="RoundRectangle 21"
+                                        BackgroundColor="{StaticResource Primario}" VerticalOptions="Start">
+                                    <Label Text="{Binding SecuenciaTexto}" TextColor="White" FontAttributes="Bold"
+                                           HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                                        <Label Text="{Binding cliente.nombre}" Style="{StaticResource Seccion}" />
+                                        <Border Grid.Column="1" Style="{StaticResource Chip}" BackgroundColor="{Binding FondoEstado}">
+                                            <Label Text="{Binding EstadoTexto}" TextColor="{Binding ColorEstado}" FontSize="12" FontAttributes="Bold" />
+                                        </Border>
+                                    </Grid>
+                                    <Label Text="{Binding numero}" Style="{StaticResource Etiqueta}" />
+                                    <Label Text="{Binding cliente.direccion}" Style="{StaticResource Cuerpo}" FontSize="14" />
+                                    <Label Text="{Binding ConductorTexto}" Style="{StaticResource Suave}" TextColor="{StaticResource PrimarioClaro}" />
+                                    <Label Text="{Binding Resumen}" Style="{StaticResource Suave}" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>

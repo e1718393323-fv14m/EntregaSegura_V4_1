@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EntregaSegura.Views.vNovedad"
+             Title="Reportar novedad"
+             Style="{StaticResource Pagina}">
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="14" MaximumWidthRequest="640">
+
+                <Border Style="{StaticResource Encabezado}" Padding="18">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="No se pudo entregar" FontSize="20" FontAttributes="Bold" TextColor="White" />
+                        <Label x:Name="lblOrden" Style="{StaticResource TextoBlanco}" TextColor="#C9D3E6" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Style="{StaticResource Tarjeta}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Motivo" Style="{StaticResource Seccion}" />
+                        <Border Style="{StaticResource Caja}">
+                            <Picker x:Name="pkMotivo" Title="Seleccione el motivo"
+                                    TextColor="{StaticResource Texto}" BackgroundColor="Transparent"
+                                    SelectedIndexChanged="pkMotivo_SelectedIndexChanged" />
+                        </Border>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Style="{StaticResource Tarjeta}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="¿Qué pasó?" Style="{StaticResource Seccion}" />
+                        <Border Style="{StaticResource Caja}" Padding="12,4">
+                            <Editor x:Name="txtDescripcion" Placeholder="Explique lo que pasó" HeightRequest="110" MaxLength="300"
+                                    TextColor="{StaticResource Texto}" TextChanged="txtDescripcion_TextChanged" />
+                        </Border>
+                        <Label x:Name="lblContador" Text="0/300" Style="{StaticResource Suave}" HorizontalOptions="End" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Style="{StaticResource Tarjeta}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Foto (opcional)" Style="{StaticResource Seccion}" />
+                        <Border StrokeThickness="0" StrokeShape="RoundRectangle 12" BackgroundColor="{StaticResource InfoSuave}" HeightRequest="170">
+                            <Grid>
+                                <Label x:Name="lblSinFoto" Text="Todavía no hay foto" Style="{StaticResource Suave}"
+                                       HorizontalOptions="Center" VerticalOptions="Center" />
+                                <Image x:Name="imgFoto" Aspect="AspectFill" />
+                            </Grid>
+                        </Border>
+                        <Button x:Name="btnFoto" Text="Tomar foto" Style="{StaticResource BotonSecundario}" Clicked="btnFoto_Clicked" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Style="{StaticResource Banner}" BackgroundColor="{StaticResource AvisoSuave}">
+                    <Label Text="La orden quedará «Con novedad» y el supervisor la revisará. Se registra su ubicación GPS si está disponible."
+                           FontSize="13" TextColor="{StaticResource Aviso}" />
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Border Grid.Row="1" BackgroundColor="White" StrokeThickness="0" Padding="20,12,20,18">
+            <VerticalStackLayout Spacing="6" MaximumWidthRequest="640">
+                <Button x:Name="btnGuardar" Text="Guardar novedad" Style="{StaticResource BotonPrimario}" Clicked="btnGuardar_Clicked" />
+                <ActivityIndicator x:Name="indicador" IsRunning="False"
+                                   Color="{StaticResource Acento}" HeightRequest="24" />
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</ContentPage>

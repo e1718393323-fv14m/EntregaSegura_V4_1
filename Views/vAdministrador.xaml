@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:modelos="clr-namespace:EntregaSegura.Models"
+             x:Class="EntregaSegura.Views.vAdministrador"
+             Title="Administración"
+             Style="{StaticResource Pagina}"
+             NavigationPage.HasBackButton="False">
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <VerticalStackLayout Padding="20,16,20,8" Spacing="12">
+            <Border Style="{StaticResource Encabezado}">
+                <Grid ColumnDefinitions="*,Auto">
+                    <VerticalStackLayout Spacing="4">
+                        <Label x:Name="lblSaludo" FontSize="22" FontAttributes="Bold" TextColor="White" />
+                        <Label Text="Administrador" Style="{StaticResource TextoBlanco}" TextColor="{StaticResource Acento}" FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                    <Image Grid.Column="1" Source="logo.png" WidthRequest="48" HeightRequest="48" VerticalOptions="Start" />
+                </Grid>
+            </Border>
+
+            <!-- Solicitudes de "Olvidé mi contraseña" -->
+            <Border x:Name="brdSolicitudes" Style="{StaticResource Banner}">
+                <VerticalStackLayout Spacing="8">
+                    <Label x:Name="lblSolicitudes" Text="Solicitudes de contraseña: –" FontAttributes="Bold" />
+                    <VerticalStackLayout x:Name="lstSolicitudes" Spacing="6" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="Usuarios" Style="{StaticResource Titulo}" FontSize="18" />
+            <Label Text="Toque un usuario para asignarle una contraseña temporal." Style="{StaticResource Suave}" />
+        </VerticalStackLayout>
+
+        <RefreshView x:Name="refrescar" Grid.Row="1" Refreshing="refrescar_Refreshing" RefreshColor="{StaticResource Acento}" Padding="20,0">
+            <CollectionView x:Name="lstUsuarios" SelectionMode="Single" SelectionChanged="lstUsuarios_SelectionChanged">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="modelos:Conductor">
+                        <Border Style="{StaticResource Tarjeta}" Margin="0,0,0,10" Padding="14">
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                                <Border WidthRequest="42" HeightRequest="42" StrokeThickness="0" StrokeShape="RoundRectangle 21"
+                                        BackgroundColor="{StaticResource Primario}" VerticalOptions="Center">
+                                    <Label Text="{Binding Iniciales}" TextColor="White" FontAttributes="Bold"
+                                           HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                    <Label Text="{Binding nombres}" Style="{StaticResource Seccion}" />
+                                    <Label Text="{Binding Detalle}" Style="{StaticResource Suave}" />
+                                    <Label Text="{Binding EstadoClave}" FontSize="12" TextColor="{StaticResource Aviso}" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <Border Grid.Row="2" BackgroundColor="White" StrokeThickness="0" Padding="20,10,20,16">
+            <Button x:Name="btnSalir" Text="Cerrar sesión" Style="{StaticResource BotonPeligro}" Clicked="btnSalir_Clicked" />
+        </Border>
+    </Grid>
+</ContentPage>

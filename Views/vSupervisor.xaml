@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EntregaSegura.Views.vSupervisor"
+             Title="Panel del supervisor"
+             Style="{StaticResource Pagina}"
+             NavigationPage.HasBackButton="False">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16" MaximumWidthRequest="640">
+
+            <Border Style="{StaticResource Encabezado}">
+                <Grid ColumnDefinitions="*,Auto">
+                    <VerticalStackLayout Spacing="4">
+                        <Label x:Name="lblSaludo" FontSize="22" FontAttributes="Bold" TextColor="White" />
+                        <Label Text="Supervisor" Style="{StaticResource TextoBlanco}" TextColor="{StaticResource Acento}" FontAttributes="Bold" />
+                        <Label x:Name="lblFecha" Style="{StaticResource TextoBlanco}" TextColor="#C9D3E6" />
+                    </VerticalStackLayout>
+                    <Image Grid.Column="1" Source="logo.png" WidthRequest="48" HeightRequest="48" VerticalOptions="Start" />
+                </Grid>
+            </Border>
+
+            <!-- Indicadores del equipo -->
+            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="12">
+                <Border Style="{StaticResource Tarjeta}">
+                    <VerticalStackLayout>
+                        <Label x:Name="lblTotal" Text="–" Style="{StaticResource Numero}" />
+                        <Label Text="Órdenes" Style="{StaticResource Suave}" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="1" Style="{StaticResource Tarjeta}">
+                    <VerticalStackLayout>
+                        <Label x:Name="lblPendientes" Text="–" Style="{StaticResource Numero}" TextColor="{StaticResource Aviso}" />
+                        <Label Text="Pendientes" Style="{StaticResource Suave}" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Row="1" Style="{StaticResource Tarjeta}">
+                    <VerticalStackLayout>
+                        <Label x:Name="lblEntregadas" Text="–" Style="{StaticResource Numero}" TextColor="{StaticResource Exito}" />
+                        <Label Text="Entregadas" Style="{StaticResource Suave}" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource Tarjeta}">
+                    <VerticalStackLayout>
+                        <Label x:Name="lblNovedades" Text="–" Style="{StaticResource Numero}" TextColor="{StaticResource Peligro}" />
+                        <Label Text="Con novedad" Style="{StaticResource Suave}" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <!-- Avance -->
+            <Border Style="{StaticResource Tarjeta}">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Avance del equipo" Style="{StaticResource Seccion}" />
+                        <Label Grid.Column="1" x:Name="lblAvance" Text="0 %" Style="{StaticResource Seccion}" />
+                    </Grid>
+                    <ProgressBar x:Name="barAvance" Progress="0" ProgressColor="{StaticResource Acento}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border x:Name="brdPorRevisar" Style="{StaticResource Banner}">
+                <Label x:Name="lblPorRevisar" Text="Novedades por revisar: –" FontAttributes="Bold" />
+            </Border>
+
+            <Button x:Name="btnOrdenes" Text="Todas las órdenes" Style="{StaticResource BotonPrimario}" Clicked="btnOrdenes_Clicked" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Button x:Name="btnNovedades" Text="Revisar novedades" Style="{StaticResource BotonSecundario}" Clicked="btnNovedades_Clicked" />
+                <Button Grid.Column="1" x:Name="btnPerfil" Text="Mi perfil" Style="{StaticResource BotonSecundario}" Clicked="btnPerfil_Clicked" />
+            </Grid>
+            <Button x:Name="btnSalir" Text="Cerrar sesión" Style="{StaticResource BotonPeligro}" Clicked="btnSalir_Clicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

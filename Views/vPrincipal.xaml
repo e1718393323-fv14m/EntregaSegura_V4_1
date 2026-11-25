@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EntregaSegura.Views.vPrincipal"
+             Title="Inicio"
+             Style="{StaticResource Pagina}"
+             NavigationPage.HasBackButton="False">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16" MaximumWidthRequest="640">
+
+            <!-- Saludo -->
+            <Border Style="{StaticResource Encabezado}">
+                <Grid ColumnDefinitions="*,Auto">
+                    <VerticalStackLayout Spacing="4">
+                        <Label x:Name="lblSaludo" FontSize="22" FontAttributes="Bold" TextColor="White" />
+                        <Label x:Name="lblFecha" Style="{StaticResource TextoBlanco}" TextColor="{StaticResource Acento}" />
+                        <Label x:Name="lblVehiculo" Style="{StaticResource TextoBlanco}" TextColor="#C9D3E6" />
+                    </VerticalStackLayout>
+                    <Image Grid.Column="1" Source="logo.png" WidthRequest="48" HeightRequest="48" VerticalOptions="Start" />
+                </Grid>
+            </Border>
+
+            <!-- Indicadores -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Border Style="{StaticResource Tarjeta}">
+                    <VerticalStackLayout>
+                        <BoxView WidthRequest="28" HeightRequest="5" CornerRadius="3" Color="{StaticResource Acento}" HorizontalOptions="Start" />
+                        <Label x:Name="lblPendientes" Text="–" Style="{StaticResource Numero}" />
+                        <Label Text="Pendientes" Style="{StaticResource Suave}" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="1" Style="{StaticResource Tarjeta}">
+                    <VerticalStackLayout>
+                        <BoxView WidthRequest="28" HeightRequest="5" CornerRadius="3" Color="{StaticResource Exito}" HorizontalOptions="Start" />
+                        <Label x:Name="lblRealizadas" Text="–" Style="{StaticResource Numero}" />
+                        <Label Text="Realizadas" Style="{StaticResource Suave}" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <!-- Avance de la jornada -->
+            <Border Style="{StaticResource Tarjeta}">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Avance de la jornada" Style="{StaticResource Seccion}" />
+                        <Label Grid.Column="1" x:Name="lblAvance" Text="0 %" Style="{StaticResource Seccion}" />
+                    </Grid>
+                    <ProgressBar x:Name="barAvance" Progress="0" ProgressColor="{StaticResource Acento}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Estado de conexión y operaciones guardadas sin internet -->
+            <Border x:Name="brdConexion" Style="{StaticResource Banner}" IsVisible="False">
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                    <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+                        <Label x:Name="lblConexion" FontAttributes="Bold" FontSize="14" />
+                        <Label x:Name="lblPendientesSync" FontSize="13" />
+                    </VerticalStackLayout>
+                    <Button Grid.Column="1" x:Name="btnSincronizar" Text="Sincronizar" Style="{StaticResource BotonSecundario}"
+                            MinimumHeightRequest="40" FontSize="13" Clicked="btnSincronizar_Clicked" />
+                </Grid>
+            </Border>
+
+            <Button x:Name="btnEntregas" Text="Mis entregas de hoy" Style="{StaticResource BotonPrimario}" Clicked="btnEntregas_Clicked" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Button x:Name="btnHistorial" Text="Historial" Style="{StaticResource BotonSecundario}" Clicked="btnHistorial_Clicked" />
+                <Button Grid.Column="1" x:Name="btnPerfil" Text="Mi perfil" Style="{StaticResource BotonSecundario}" Clicked="btnPerfil_Clicked" />
+            </Grid>
+            <Button x:Name="btnSalir" Text="Cerrar sesión" Style="{StaticResource BotonPeligro}" Clicked="btnSalir_Clicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

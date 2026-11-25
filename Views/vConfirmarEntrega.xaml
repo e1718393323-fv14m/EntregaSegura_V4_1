@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="EntregaSegura.Views.vConfirmarEntrega"
+             Title="Confirmar entrega"
+             Style="{StaticResource Pagina}">
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="14" MaximumWidthRequest="640">
+
+                <Border Style="{StaticResource Encabezado}" Padding="18">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Prueba de entrega" FontSize="20" FontAttributes="Bold" TextColor="White" />
+                        <Label x:Name="lblOrden" Style="{StaticResource TextoBlanco}" TextColor="#C9D3E6" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- 1. Quién recibe -->
+                <Border Style="{StaticResource Tarjeta}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="1. ¿Quién recibe?" Style="{StaticResource Seccion}" />
+                        <Border Style="{StaticResource Caja}">
+                            <Entry x:Name="txtRecibe" Style="{StaticResource Entrada}" Placeholder="Nombres y apellidos"
+                                   MaxLength="60" TextChanged="txtRecibe_TextChanged" />
+                        </Border>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- 2. Foto (sensor: cámara) -->
+                <Border Style="{StaticResource Tarjeta}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="2. Foto del pedido entregado" Style="{StaticResource Seccion}" />
+                        <Border StrokeThickness="0" StrokeShape="RoundRectangle 12" BackgroundColor="{StaticResource InfoSuave}" HeightRequest="190">
+                            <Grid>
+                                <Label x:Name="lblSinFoto" Text="Todavía no hay foto" Style="{StaticResource Suave}"
+                                       HorizontalOptions="Center" VerticalOptions="Center" />
+                                <Image x:Name="imgFoto" Aspect="AspectFill" />
+                            </Grid>
+                        </Border>
+                        <Button x:Name="btnFoto" Text="Tomar foto" Style="{StaticResource BotonSecundario}" Clicked="btnFoto_Clicked" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- 3. Firma (sensor: pantalla táctil) -->
+                <Border Style="{StaticResource Tarjeta}">
+                    <VerticalStackLayout Spacing="10">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="3. Firma del cliente" Style="{StaticResource Seccion}" VerticalOptions="Center" />
+                            <Button Grid.Column="1" x:Name="btnBorrarFirma" Text="Borrar" Style="{StaticResource BotonTexto}" Clicked="btnBorrarFirma_Clicked" />
+                        </Grid>
+                        <Border Stroke="{StaticResource Linea}" StrokeThickness="1.5" StrokeDashArray="4,3" StrokeShape="RoundRectangle 12"
+                                BackgroundColor="White" HeightRequest="170">
+                            <toolkit:DrawingView x:Name="drwFirma"
+                                                 LineColor="#0B1F3A"
+                                                 LineWidth="4"
+                                                 IsMultiLineModeEnabled="True"
+                                                 ShouldClearOnFinish="False"
+                                                 BackgroundColor="Transparent"
+                                                 DrawingLineCompleted="drwFirma_DrawingLineCompleted" />
+                        </Border>
+                        <Label Text="Pida al cliente que firme con el dedo dentro del recuadro." Style="{StaticResource Suave}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- 4. Ubicación (sensor: GPS) -->
+                <Border Style="{StaticResource Tarjeta}">
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                        <VerticalStackLayout Spacing="4" VerticalOptions="Center">
+                            <Label Text="4. Ubicación GPS" Style="{StaticResource Seccion}" />
+                            <Label x:Name="lblUbicacion" Text="Sin leer" Style="{StaticResource Suave}" />
+                        </VerticalStackLayout>
+                        <Button Grid.Column="1" x:Name="btnUbicacion" Text="Actualizar" Style="{StaticResource BotonSecundario}"
+                                MinimumHeightRequest="44" Clicked="btnUbicacion_Clicked" />
+                    </Grid>
+                </Border>
+
+                <!-- 5. Conformidad -->
+                <Border Style="{StaticResource Tarjeta}">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <CheckBox x:Name="chkConforme" Color="{StaticResource Primario}" CheckedChanged="chkConforme_CheckedChanged" />
+                        <Label Grid.Column="1" Text="5. El cliente recibe conforme" Style="{StaticResource Cuerpo}" VerticalOptions="Center" />
+                    </Grid>
+                </Border>
+
+                <!-- Lista de verificación dinámica -->
+                <Border Style="{StaticResource Banner}">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Antes de guardar" Style="{StaticResource Etiqueta}" />
+                        <Label x:Name="lblChecklist" Style="{StaticResource Cuerpo}" FontSize="14" LineHeight="1.3" />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Border Grid.Row="1" BackgroundColor="White" StrokeThickness="0" Padding="20,12,20,18">
+            <VerticalStackLayout Spacing="6" MaximumWidthRequest="640">
+                <Button x:Name="btnGuardar" Text="Guardar entrega" Style="{StaticResource BotonExito}" IsEnabled="False" Clicked="btnGuardar_Clicked" />
+                <ActivityIndicator x:Name="indicador" IsRunning="False"
+                                   Color="{StaticResource Acento}" HeightRequest="24" />
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</ContentPage>

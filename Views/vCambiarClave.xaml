@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EntregaSegura.Views.vCambiarClave"
+             Title="Nueva contraseña"
+             Style="{StaticResource Pagina}"
+             NavigationPage.HasBackButton="False">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14" MaximumWidthRequest="520">
+
+            <Border Style="{StaticResource Encabezado}">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Cree su nueva contraseña" FontSize="20" FontAttributes="Bold" TextColor="White" />
+                    <Label Text="Ingresó con una contraseña temporal entregada por el administrador. Por seguridad debe reemplazarla."
+                           Style="{StaticResource TextoBlanco}" TextColor="#C9D3E6" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource Tarjeta}">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Nueva contraseña" Style="{StaticResource Etiqueta}" />
+                    <Border Style="{StaticResource Caja}">
+                        <Entry x:Name="txtNueva" Style="{StaticResource Entrada}" IsPassword="True" Placeholder="Mínimo 8 caracteres"
+                               TextChanged="Clave_TextChanged" />
+                    </Border>
+                    <Label Text="Repita la contraseña" Style="{StaticResource Etiqueta}" />
+                    <Border Style="{StaticResource Caja}">
+                        <Entry x:Name="txtRepetir" Style="{StaticResource Entrada}" IsPassword="True" Placeholder="Repita la contraseña"
+                               TextChanged="Clave_TextChanged" />
+                    </Border>
+                    <Label x:Name="lblReglas" Style="{StaticResource Cuerpo}" FontSize="14" LineHeight="1.3" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Button x:Name="btnGuardar" Text="Guardar contraseña" Style="{StaticResource BotonPrimario}" IsEnabled="False" Clicked="btnGuardar_Clicked" />
+            <Button x:Name="btnSalir" Text="Cancelar y salir" Style="{StaticResource BotonTexto}" HorizontalOptions="Center" Clicked="btnSalir_Clicked" />
+            <ActivityIndicator x:Name="indicador" IsRunning="False" Color="{StaticResource Acento}" HeightRequest="24" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:modelos="clr-namespace:EntregaSegura.Models"
+             x:Class="EntregaSegura.Views.vNovedades"
+             Title="Novedades"
+             Style="{StaticResource Pagina}">
+    <Grid RowDefinitions="Auto,*" Padding="20,16,20,0" RowSpacing="12">
+        <VerticalStackLayout Spacing="2">
+            <Label Text="Novedades del equipo" Style="{StaticResource Titulo}" />
+            <Label Text="Toque una novedad pendiente para registrar la revisión" Style="{StaticResource Suave}" />
+        </VerticalStackLayout>
+
+        <RefreshView x:Name="refrescar" Grid.Row="1" Refreshing="refrescar_Refreshing" RefreshColor="{StaticResource Acento}">
+            <CollectionView x:Name="lstNovedades" SelectionMode="Single" SelectionChanged="lstNovedades_SelectionChanged">
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout Padding="30" Spacing="8" HorizontalOptions="Center">
+                        <Label Text="Sin novedades" Style="{StaticResource Seccion}" HorizontalTextAlignment="Center" />
+                        <Label Text="Los conductores no han reportado problemas." Style="{StaticResource Suave}" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="modelos:Novedad">
+                        <Border Style="{StaticResource Tarjeta}" Margin="0,0,0,12">
+                            <VerticalStackLayout Spacing="6">
+                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                                    <Label Text="{Binding Titulo}" Style="{StaticResource Seccion}" />
+                                    <Border Grid.Column="1" Style="{StaticResource Chip}" BackgroundColor="{Binding FondoEstado}">
+                                        <Label Text="{Binding Chip}" TextColor="{Binding ColorEstado}" FontSize="12" FontAttributes="Bold" />
+                                    </Border>
+                                </Grid>
+                                <Label Text="{Binding Detalle}" Style="{StaticResource Cuerpo}" FontSize="14" />
+                                <Label Text="{Binding Info}" Style="{StaticResource Suave}" />
+                                <Label Text="{Binding EstadoTexto}" FontSize="13" TextColor="{Binding ColorEstado}" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>

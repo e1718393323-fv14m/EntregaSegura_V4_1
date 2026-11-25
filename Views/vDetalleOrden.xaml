@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EntregaSegura.Views.vDetalleOrden"
+             Title="Detalle de la orden"
+             Style="{StaticResource Pagina}">
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="14" MaximumWidthRequest="640">
+
+                <!-- Encabezado -->
+                <Border Style="{StaticResource Encabezado}">
+                    <VerticalStackLayout Spacing="6">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label x:Name="lblNumero" FontSize="22" FontAttributes="Bold" TextColor="White" />
+                            <Border Grid.Column="1" x:Name="brdEstado" Style="{StaticResource Chip}">
+                                <Label x:Name="lblEstado" FontSize="12" FontAttributes="Bold" />
+                            </Border>
+                        </Grid>
+                        <Label x:Name="lblCliente" FontSize="18" TextColor="White" />
+                        <Label x:Name="lblConductor" Style="{StaticResource TextoBlanco}" TextColor="#C9D3E6" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Cliente -->
+                <Border Style="{StaticResource Tarjeta}">
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Cliente" Style="{StaticResource Seccion}" />
+                        <Label x:Name="lblRuc" Style="{StaticResource Suave}" />
+                        <Label Text="Dirección" Style="{StaticResource Etiqueta}" Margin="0,6,0,0" />
+                        <Label x:Name="lblDireccion" Style="{StaticResource Cuerpo}" />
+                        <Label Text="Teléfono" Style="{StaticResource Etiqueta}" />
+                        <Label x:Name="lblTelefono" Style="{StaticResource Cuerpo}" />
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,8,0,0">
+                            <Button x:Name="btnComoLlegar" Text="Cómo llegar" Style="{StaticResource BotonSecundario}" Clicked="btnComoLlegar_Clicked" />
+                            <Button Grid.Column="1" x:Name="btnLlamar" Text="Llamar" Style="{StaticResource BotonSecundario}" Clicked="btnLlamar_Clicked" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Productos -->
+                <Border Style="{StaticResource Tarjeta}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Productos" Style="{StaticResource Seccion}" />
+                        <Label x:Name="lblProductos" Style="{StaticResource Cuerpo}" FontSize="14" LineHeight="1.3" />
+                        <BoxView HeightRequest="1" Color="{StaticResource Linea}" />
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label x:Name="lblUnidades" Style="{StaticResource Suave}" VerticalOptions="Center" />
+                            <Label Grid.Column="1" x:Name="lblTotal" Style="{StaticResource Seccion}" TextColor="{StaticResource Primario}" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Acciones fijas abajo, al alcance del pulgar -->
+        <Border Grid.Row="1" BackgroundColor="White" StrokeThickness="0" Padding="20,12,20,18">
+            <VerticalStackLayout Spacing="10" MaximumWidthRequest="640">
+                <Button x:Name="btnEntregar" Text="Confirmar entrega" Style="{StaticResource BotonExito}" Clicked="btnEntregar_Clicked" />
+                <Button x:Name="btnNovedad" Text="No se pudo entregar" Style="{StaticResource BotonPeligro}" Clicked="btnNovedad_Clicked" />
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</ContentPage>
